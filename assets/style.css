@@ -1,300 +1,70 @@
 
-/* =========================================================
-   HELP — Site de Políticas (Tema fiel ao app)
-   Referência visual: topo laranja + chips + cards brancos
-   ========================================================= */
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HELP • Políticas & Suporte</title>
+  assets/style.css
+</head>
+<body>
 
-:root{
-  --orange:#FF7F00;
-  --text:#222;
-  --muted:#666;
-  --border:#D9D9D9;
+  <header>
+    <div class="container">
+      <div class="brand">
+        <span class="dot"></span>
+        <span><strong>HELP</strong> • Políticas &amp; Suporte</span>
+      </div>
 
-  --bg:#ffffff;
-  --chip:#f2f2f2;
-  --shadow: 0 2px 10px rgba(0,0,0,.06);
-  --shadow2: 0 6px 16px rgba(0,0,0,.08);
-  --radius: 12px;
-  --radiusChip: 10px;
-}
+      <nav>
+        ./Início</a>
+        privacy/Privacidade</a>
+        terms/Termos</a>
+        delete-account/Excluir conta</a>
+        support/Suporte</a>
+      </nav>
+    </div>
+  </header>
 
-*{ box-sizing:border-box; }
-html, body{ height:100%; }
+  <main class="container">
+    <div class="card">
 
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.55;
-}
+      <h1>Políticas &amp; Suporte</h1>
+      <p class="muted">
+        Site oficial do app <strong>HELP</strong> para políticas, suporte e solicitação de exclusão de conta.
+      </p>
 
-/* Layout */
-.container{
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 16px;
-}
+      <!-- “Busca” visual (somente visual, desabilitada) -->
+      <input class="searchBar" placeholder="Pesquise por nome" disabled />
 
-main{
-  padding: 14px 0 30px;
-}
+      <!-- Chips estilo app (links reais) -->
+      <div class="chipRow">
+        privacy/<span class="i">★</span> Privacidade</a>
+        terms/<span class="i">💬</span> Termos</a>
+        delete-account/<span class="i">📍</span> Excluir conta</a>
+      </div>
 
-/* =========================================================
-   HEADER — barra laranja fixa (igual app)
-   ========================================================= */
-header{
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--orange);
-  border-bottom: 1px solid rgba(0,0,0,.06);
-}
+      <!-- Botão principal -->
+      <div class="bigCTA">
+        support/Falar com o Suporte</a>
+      </div>
 
-header .container{
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
+      <!-- Card interno -->
+      <div class="section">
+        <div class="sectionTitle">Links rápidos</div>
+        <ul>
+          <li>privacy/Política de Privacidade</a></li>
+          <li>terms/Termos de Uso</a></li>
+          <li>delete-account/Solicitar exclusão de conta</a></li>
+          <li>support/Suporte / Contato</a></li>
+        </ul>
+      </div>
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight: 900;
-  letter-spacing: .2px;
-  color:#fff;
-}
+      <hr />
+      <p class="footer">Última atualização: <strong>16/01/2026</strong></p>
 
-/* “hamburger” fake igual seu header do app (sem mexer no HTML) */
-.brand::before{
-  content: "☰";
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width: 28px;
-  height: 28px;
-  font-size: 18px;
-  line-height: 1;
-  color:#fff;
-  opacity:.95;
-}
+    </div>
+  </main>
 
-/* bolinha do logo vira branca pq o topo já é laranja */
-.dot{
-  width: 10px;
-  height: 10px;
-  background: #fff;
-  border-radius: 999px;
-  box-shadow: 0 0 0 4px rgba(255,255,255,.18);
-}
-
-/* =========================================================
-   NAV — chips cinza (Nota/Reviews/Cidade style)
-   ========================================================= */
-nav{
-  display:flex;
-  flex-wrap: wrap;
-  gap:10px;
-  margin-top: 12px;
-}
-
-nav a{
-  text-decoration:none;
-  color: var(--text);
-  font-weight: 800;
-  font-size: 13px;
-  padding: 9px 12px;
-  border-radius: var(--radiusChip);
-  background: var(--chip);
-  border: 1px solid rgba(0,0,0,.10);
-  box-shadow: 0 1px 0 rgba(0,0,0,.03);
-  transition: transform .08s ease, background .12s ease, border-color .12s ease;
-}
-
-nav a:hover{
-  background: rgba(255,255,255,.86);
-  border-color: rgba(255,255,255,.55);
-  transform: translateY(-1px);
-}
-
-/* =========================================================
-   COMPONENTES “APP”
-   ========================================================= */
-
-/* Card geral */
-.card{
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-}
-
-/* Seções internas tipo “cards dentro” (fica igual Detalhes) */
-.section{
-  margin-top: 14px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  box-shadow: var(--shadow);
-}
-
-.sectionTitle{
-  font-size: 16px;
-  font-weight: 800;
-  margin: 0 0 10px;
-  color: var(--text);
-}
-
-/* Botões estilo app */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  width: 100%;
-  background: var(--orange);
-  color: #fff;
-  font-weight: 900;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 14px;
-  text-decoration:none;
-  box-shadow: 0 6px 16px rgba(255,127,0,.22);
-  transition: transform .08s ease, filter .12s ease;
-}
-.btn:hover{ filter: brightness(.98); transform: translateY(-1px); }
-
-.btnRow{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap:10px;
-  margin-top: 10px;
-}
-
-.btnGreen{ background:#25D366; box-shadow: 0 6px 16px rgba(37,211,102,.22); }
-.btnBlue{ background:#007BFF; box-shadow: 0 6px 16px rgba(0,123,255,.22); }
-.btnPink{ background:#E1306C; box-shadow: 0 6px 16px rgba(225,48,108,.22); }
-
-.btnOutline{
-  background:#fff;
-  color: var(--orange);
-  border: 2px solid var(--orange);
-  box-shadow: none;
-}
-
-/* “Busca” fake tipo sua home */
-.searchBar{
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 11px 12px;
-  font-size: 15px;
-  color: var(--text);
-  background: #fff;
-  outline: none;
-}
-
-/* Chips de atalho (3 botões como no app) */
-.chipRow{
-  display:flex;
-  gap:10px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-
-.chip{
-  flex: 1;
-  min-width: 120px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  background: var(--chip);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 9px 10px;
-  font-weight: 800;
-  color: var(--text);
-  text-decoration: none;
-  box-shadow: 0 1px 0 rgba(0,0,0,.03);
-}
-
-/* Ícone bolinha laranja dentro do chip */
-.chip .i{
-  width: 18px; height: 18px;
-  border-radius: 9px;
-  background: rgba(255,127,0,.12);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  color: var(--orange);
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.bigCTA{
-  margin-top: 10px;
-}
-
-/* Tipografia */
-h1{
-  margin: 0 0 10px;
-  font-size: 26px;
-  line-height: 1.2;
-}
-h2{
-  margin-top: 18px;
-  font-size: 18px;
-  line-height: 1.25;
-}
-h3{
-  margin-top: 14px;
-  font-size: 15px;
-  line-height: 1.25;
-}
-
-.muted, small{ color: var(--muted); }
-
-hr{
-  border:none;
-  border-top: 1px solid var(--border);
-  margin: 18px 0;
-}
-
-/* Links */
-a.inline{
-  color: var(--orange);
-  font-weight: 900;
-  text-decoration: none;
-}
-a.inline:hover{ text-decoration: underline; }
-
-code{
-  background: rgba(255,127,0,.10);
-  border: 1px solid rgba(255,127,0,.25);
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-weight: 900;
-  color: #5a2a00;
-}
-
-/* Listas */
-ul{ padding-left: 18px; }
-li{ margin: 6px 0; }
-
-/* Footer */
-.footer{
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* Responsivo */
-@media (max-width: 520px){
-  h1{ font-size: 22px; }
-  nav a{ font-size: 12px; padding: 9px 10px; }
-  .container{ padding: 14px; }
-  .chip{ min-width: 110px; }
-}
+</body>
+</html>
