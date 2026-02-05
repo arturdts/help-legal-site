@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="HELP — descubra negócios locais e fortaleça empreendedores. Políticas, suporte e exclusão de conta." />
-  <title>HELP • Políticas & Suporte</title>
+  <title>HELP • Políticas &amp; Suporte</title>
 
   <!-- CSS (caminho seguro no GitHub Pages do projeto) -->
   <link rel="stylesheet" href="/help-legal-site/assets/style.css">
@@ -14,13 +14,18 @@
   <header>
     <div class="container">
       <div class="brand">
-        <!-- Ícone do app -->
+        <!-- Logo maior + “nota” da página -->
         <img
           src="/help-legal-site/assets/icon.png"
           alt="HELP"
-          style="width:28px;height:28px;border-radius:8px;object-fit:cover;background:rgba(255,255,255,.18);padding:2px;"
+          style="width:42px;height:42px;border-radius:12px;object-fit:cover;background:rgba(255,255,255,.18);padding:3px;border:1px solid rgba(255,255,255,.28);"
         />
-        <span><strong>Negócios Locais</strong></span>
+        <span style="display:flex;align-items:center;gap:10px;">
+          <strong>Negócios Locais</strong>
+          <span style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.22);">
+            Início
+          </span>
+        </span>
       </div>
 
       <nav>
@@ -96,35 +101,45 @@
         </p>
       </div>
 
+      <!-- ✅ Corrigido: estava quebrado e aparecendo "ong>Supabase..." -->
       <div class="section">
         <div class="sectionTitle">Privacidade (resumo rápido)</div>
         <ul>
-         ong>Supabase</strong> para autenticação, banco de dados e armazenamento de imagens, apenas para entregar as funcionalidades do serviço.
+          <li><strong>Sem anúncios</strong></li>
+          <li><strong>Sem tracking</strong></li>
+          <li><strong>Sem analytics</strong></li>
+          <li><strong>Sem coleta de GPS</strong></li>
+        </ul>
+        <p class="muted">
+          O app utiliza <strong>Supabase</strong> para autenticação, banco de dados e armazenamento de imagens,
+          apenas para entregar as funcionalidades do serviço.
         </p>
       </div>
 
+      <!-- ✅ Corrigido: links estavam virando texto (faltavam <a> completos) -->
       <div class="section">
         <div class="sectionTitle">Páginas oficiais neste site</div>
 
         <div class="chipRow">
-          /help-legal-site/privacy/<span class="i">★</span> Privacidade</a>
-          /help-legal-site/terms/<span class="i">💬</span> Termos</a>
-          /help-legal-site/delete-account/<span class="i">🗑️</span> Excluir conta</a>
+          <a class="chip" href="/help-legal-site/privacy/"><span class="i">★</span> Privacidade</a>
+          <a class="chip" href="/help-legal-site/terms/"><span class="i">💬</span> Termos</a>
+          <a class="chip" href="/help-legal-site/delete-account/"><span class="i">🗑️</span> Excluir conta</a>
         </div>
 
         <div class="bigCTA">
-          /help-legal-site/support/Falar com o Suporte</a>
+          <a class="btn" href="/help-legal-site/support/">Falar com o Suporte</a>
         </div>
       </div>
 
       <div class="section">
         <div class="sectionTitle">Excluir conta</div>
-        <p>
-          Você pode excluir sua conta:
-        </p>
+        <p>Você pode excluir sua conta:</p>
         <ul>
           <li><strong>No app:</strong> <code>Perfil → Editar perfil → Excluir minha conta</code></li>
-          <li><strong>Fora do app:</strong> solicitação por e-mail em <strong>help.contatosuporte@gmail.com</strong> (veja a página “Excluir conta”)</li>
+          <li>
+            <strong>Fora do app:</strong> solicitação por e-mail em <strong>help.contatosuporte@gmail.com</strong>
+            (veja a página <a class="inline" href="/help-legal-site/delete-account/">Excluir conta</a>)
+          </li>
         </ul>
         <p class="muted">
           Ao excluir, o HELP remove os dados vinculados ao usuário (perfil, negócios, fotos, reviews, curtidas/interações e registros associados).
@@ -133,7 +148,9 @@
 
       <hr />
       <p class="footer">
-        Suporte: mailto:help.contatosuporte@gmail.comhelp.contatosuporte@gmail.com</a> (até 48h)
+        Suporte:
+        <a class="inline" href="mailto:help.contatosuporte@gmail.com">help.contatosuporte@gmail.com</a>
+        (até 48h)
       </p>
     </div>
   </main>
