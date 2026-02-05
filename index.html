@@ -1,11 +1,13 @@
-
 <!doctype html>
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Página oficial do app HELP com políticas, suporte e solicitação de exclusão de conta." />
   <title>HELP • Políticas & Suporte</title>
-  assets/style.css
+
+  <!-- CSS (corrigido) -->
+  <link rel="stylesheet" href="/help-legal-site/assets/style.css" />
 </head>
 
 <body>
@@ -17,11 +19,11 @@
       </div>
 
       <nav>
-        ./Início</a>
-        privacy/Privacidade</a>
-        terms/Termos</a>
-        delete-account/Excluir conta</a>
-        support/Suporte</a>
+        <a href="/help-legal-site/" aria-current="page">Início</a>
+        <a href="/help-legal-site/privacy/">Privacidade</a>
+        <a href="/help-legal-site/terms/">Termos</a>
+        <a href="/help-legal-site/delete-account/">Excluir conta</a>
+        <a href="/help-legal-site/support/">Suporte</a>
       </nav>
     </div>
   </header>
@@ -29,6 +31,7 @@
   <main class="container">
     <div class="card">
       <h1>Políticas &amp; Suporte</h1>
+
       <p class="muted">
         Site oficial do app <strong>HELP</strong> para políticas, suporte e solicitação de exclusão de conta.
       </p>
@@ -36,22 +39,30 @@
       <input class="searchBar" placeholder="Pesquise por nome" disabled />
 
       <div class="chipRow">
-        privacy/<span class="i">★</span> Privacidade</a>
-        terms/<span class="i">💬</span> Termos</a>
-        delete-account/<span class="i">📍</span> Excluir conta</a>
+        <a class="chip" href="/help-legal-site/privacy/">
+          <span class="i">★</span> Privacidade
+        </a>
+
+        <a class="chip" href="/help-legal-site/terms/">
+          <span class="i">💬</span> Termos
+        </a>
+
+        <a class="chip" href="/help-legal-site/delete-account/">
+          <span class="i">📍</span> Excluir conta
+        </a>
       </div>
 
       <div class="bigCTA">
-        support/Falar com o Suporte</a>
+        <a class="btn" href="/help-legal-site/support/">Falar com o Suporte</a>
       </div>
 
       <div class="section">
         <div class="sectionTitle">Links rápidos</div>
         <ul>
-          <li>privacy/Política de Privacidade</a></li>
-          <li>terms/Termos de Uso</a></li>
-          <li>delete-account/Solicitar exclusão de conta</a></li>
-          <li>support/Suporte / Contato</a></li>
+          <li><a class="inline" href="/help-legal-site/privacy/">Política de Privacidade</a></li>
+          <li><a class="inline" href="/help-legal-site/terms/">Termos de Uso</a></li>
+          <li><a class="inline" href="/help-legal-site/delete-account/">Solicitar exclusão de conta</a></li>
+          <li><a class="inline" href="/help-legal-site/support/">Suporte / Contato</a></li>
         </ul>
       </div>
 
