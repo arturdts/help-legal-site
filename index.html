@@ -1,158 +1,826 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HELP — descubra negócios locais e fortaleça empreendedores. Políticas, suporte e exclusão de conta." />
-  <title>HELP • Políticas &amp; Suporte</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HELP — Descubra Negócios Locais</title>
+  <meta name="description" content="HELP é o app de comunidade positiva para descobrir negócios locais. Disponível na App Store e Google Play.">
+  <meta name="theme-color" content="#110500">
+  <link rel="icon" href="assets/icon.png" type="image/png">
 
-  <!-- CSS (caminho seguro no GitHub Pages do projeto) -->
-  <link rel="stylesheet" href="/help-legal-site/assets/style.css">
+  <!-- Open Graph -->
+  <meta property="og:title" content="HELP — Descubra Negócios Locais">
+  <meta property="og:description" content="Comunidade positiva para descobrir negócios locais. Baixe grátis!">
+  <meta property="og:image" content="assets/icon.png">
+  <meta property="og:type" content="website">
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #F77F00;
+      --orange-light: #FF9A2E;
+      --orange-glow: rgba(247, 127, 0, 0.25);
+      --bg: #110500;
+      --bg2: #1A0A00;
+      --bg-card: #1E0D02;
+      --bg-card-h: #261204;
+      --text: #FFF5EB;
+      --text2: #BFA48E;
+      --text3: #7A6455;
+      --border: rgba(247, 127, 0, 0.12);
+      --border-h: rgba(247, 127, 0, 0.3);
+      --r: 16px;
+      --r-sm: 10px;
+      --r-lg: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Noise texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px;
+    }
+
+    /* Ambient glow */
+    .glow-top {
+      position: fixed;
+      top: -300px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(247, 127, 0, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { padding: 80px 0; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 0;
+      background: rgba(17, 5, 0, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-brand img {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+    }
+    .nav-brand span {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 6px;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text2);
+      padding: 8px 14px;
+      border-radius: 99px;
+      transition: all 0.25s;
+    }
+    .nav-links a:hover {
+      color: var(--orange);
+      background: rgba(247, 127, 0, 0.08);
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      width: 22px; height: 2px;
+      background: var(--text2);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 69px; left: 0; right: 0;
+      background: rgba(17, 5, 0, 0.96);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      display: block;
+      padding: 14px 16px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text2);
+      border-radius: var(--r-sm);
+      transition: all 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: var(--orange);
+      background: rgba(247, 127, 0, 0.08);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+    @media (min-width: 641px) {
+      .nav-hamburger { display: none !important; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: 160px;
+      padding-bottom: 60px;
+      text-align: center;
+    }
+    .hero-icon {
+      width: 100px; height: 100px;
+      border-radius: 24px;
+      margin: 0 auto 32px;
+      box-shadow:
+        0 0 0 1px rgba(247,127,0,0.2),
+        0 8px 40px rgba(247,127,0,0.25),
+        0 2px 12px rgba(247,127,0,0.15);
+      animation: iconFloat 4s ease-in-out infinite;
+    }
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 99px;
+      background: rgba(247,127,0,0.1);
+      border: 1px solid rgba(247,127,0,0.2);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero h1 .hl {
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text2);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    /* Store buttons */
+    .store-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: all 0.3s;
+      color: var(--text);
+    }
+    .store-btn:hover {
+      border-color: var(--orange);
+      box-shadow: 0 4px 24px var(--orange-glow);
+      transform: translateY(-2px);
+    }
+    .store-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .store-btn .sl { text-align: left; }
+    .store-btn .sl small {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text3);
+      margin-bottom: 1px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-h), transparent);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Section common */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--orange);
+      opacity: 0.4;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .section-text {
+      color: var(--text2);
+      font-size: 1.02rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ===== ABOUT ===== */
+    .about { text-align: center; }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 28px 24px;
+      text-align: left;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .feature-card:hover {
+      border-color: var(--border-h);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(247,127,0,0.08);
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon { font-size: 1.6rem; margin-bottom: 14px; display: block; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+    /* Stats */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: -1px;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text3);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ===== DOWNLOAD ===== */
+    .download { text-align: center; }
+    .download-card {
+      background: linear-gradient(135deg, var(--bg-card), rgba(247,127,0,0.04));
+      border: 1px solid var(--border-h);
+      border-radius: var(--r-lg);
+      padding: 56px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .download-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 20%; right: 20%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+    .download-card h2 {
+      font-size: clamp(1.6rem, 4vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .download-card p {
+      color: var(--text2);
+      margin-bottom: 32px;
+    }
+
+    /* ===== LINKTREE ===== */
+    .linktree { text-align: center; }
+    .links-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .link-item::after {
+      content: '\2192';
+      margin-left: auto;
+      color: var(--text3);
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    .link-item:hover {
+      border-color: var(--orange);
+      background: var(--bg-card-h);
+      box-shadow: 0 4px 20px var(--orange-glow);
+      transform: translateX(4px);
+    }
+    .link-item:hover::after {
+      color: var(--orange);
+      transform: translateX(4px);
+    }
+    .link-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      background: rgba(247,127,0,0.1);
+    }
+    .link-icon svg { width: 20px; height: 20px; }
+    .link-item-text { text-align: left; }
+    .link-item-text small {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text3);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .link-disabled {
+      opacity: 0.40;
+      cursor: default;
+    }
+    .link-disabled:hover {
+      border-color: var(--border);
+      background: var(--bg-card);
+      box-shadow: none;
+      transform: none;
+    }
+    .link-disabled::after { display: none; }
+
+    /* ===== LEGAL ===== */
+    .legal-section { text-align: center; padding: 40px 0 60px; }
+    .legal-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .legal-link {
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text2);
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+    .legal-link:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+      background: rgba(247,127,0,0.06);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 40px 0 48px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-logo {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      margin: 0 auto 16px;
+      opacity: 0.7;
+    }
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text3);
+      font-weight: 500;
+      line-height: 1.8;
+    }
+    .footer-text a { color: var(--orange); }
+    .footer-text a:hover { opacity: 0.7; }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delay for cards */
+    .features-grid .feature-card:nth-child(2) { transition-delay: 0.08s; }
+    .features-grid .feature-card:nth-child(3) { transition-delay: 0.16s; }
+    .features-grid .feature-card:nth-child(4) { transition-delay: 0.24s; }
+    .links-stack .link-item:nth-child(2) { transition-delay: 0.06s; }
+    .links-stack .link-item:nth-child(3) { transition-delay: 0.12s; }
+    .links-stack .link-item:nth-child(4) { transition-delay: 0.18s; }
+    .links-stack .link-item:nth-child(5) { transition-delay: 0.24s; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      section { padding: 60px 0; }
+      .hero { padding-top: 130px; padding-bottom: 40px; }
+      .hero-icon { width: 80px; height: 80px; border-radius: 20px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .store-buttons { flex-direction: column; align-items: center; }
+      .store-btn { width: 100%; max-width: 300px; justify-content: center; }
+      .stats-row { gap: 32px; }
+      .download-card { padding: 40px 24px; }
+    }
+  </style>
 </head>
-
 <body>
-  <header>
+
+  <div class="glow-top"></div>
+
+  <!-- NAV -->
+  <nav>
     <div class="container">
-      <div class="brand">
-        <!-- Logo maior + “nota” da página -->
-        <img
-          src="/help-legal-site/assets/icon.png"
-          alt="HELP"
-          style="width:42px;height:42px;border-radius:12px;object-fit:cover;background:rgba(255,255,255,.18);padding:3px;border:1px solid rgba(255,255,255,.28);"
-        />
-        <span style="display:flex;align-items:center;gap:10px;">
-          <strong>Negócios Locais</strong>
-          <span style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.22);">
-            Início
-          </span>
-        </span>
+      <a href="#" class="nav-brand">
+        <img src="assets/icon.png" alt="HELP">
+        <span>HELP</span>
+      </a>
+      <div class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#download">Download</a>
+        <a href="#links">Links</a>
+        <a href="#legal">Legal</a>
       </div>
-
-      <nav>
-        <a href="/help-legal-site/">Início</a>
-        <a href="/help-legal-site/privacy/">Privacidade</a>
-        <a href="/help-legal-site/terms/">Termos</a>
-        <a href="/help-legal-site/delete-account/">Excluir conta</a>
-        <a href="/help-legal-site/support/">Suporte</a>
-      </nav>
+      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </header>
+  </nav>
 
-  <main class="container">
-    <div class="card">
-      <h1>HELP — descubra negócios locais</h1>
-      <p class="muted">Última atualização: <strong>16/01/2026</strong></p>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#sobre" onclick="closeMenu()">Sobre</a>
+    <a href="#download" onclick="closeMenu()">Download</a>
+    <a href="#links" onclick="closeMenu()">Links</a>
+    <a href="#legal" onclick="closeMenu()">Legal</a>
+  </div>
 
-      <p>
-        O <strong>HELP</strong> é um aplicativo feito para <strong>descoberta rápida de negócios locais</strong> e para aproximar
-        <strong>empreendedores de diferentes tipos e tamanhos</strong> do público. A ideia é simples: você encontra serviços, produtos
-        e profissionais de forma prática, vê fotos e informações essenciais, e pode entrar em contato direto com o negócio
-        (por exemplo, via <strong>WhatsApp</strong>).
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <img src="assets/icon.png" alt="HELP" class="hero-icon fade-up">
+      <div class="hero-badge fade-up">&#9679; App disponível grátis</div>
+      <h1 class="fade-up">Descubra <span class="hl">negócios locais</span> perto de você</h1>
+      <p class="hero-sub fade-up">Comunidade positiva onde bons negócios ganham visibilidade e você encontra serviços com transparência e confiança.</p>
+      <div class="store-buttons fade-up">
+        <a href="https://apps.apple.com/br/app/help-neg%C3%B3cios-locais/id6756894101" target="_blank" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="sl">
+            <small>Baixe na</small>
+            App Store
+          </div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.artur.help&hl=pt_BR" target="_blank" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+          <div class="sl">
+            <small>Disponível no</small>
+            Google Play
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOBRE -->
+  <section class="about" id="sobre">
+    <div class="container">
+      <div class="section-label fade-up">Sobre o app</div>
+      <h2 class="section-title fade-up">Tudo sobre o <span class="hl">HELP</span></h2>
+      <p class="section-text fade-up">
+        O HELP é um aplicativo feito para a descoberta rápida de negócios locais. 
+        Encontre serviços, veja fotos, avaliações e entre em contato direto — tudo de forma simples, sem anúncios e sem tracking.
       </p>
 
-      <p>
-        Ao mesmo tempo, o HELP é uma ferramenta para empreendedores criarem presença digital sem complicação: dá para montar um perfil com
-        <strong>biografia</strong>, <strong>endereço</strong>, <strong>horários</strong>, <strong>valores</strong>, <strong>carro‑chefe</strong>,
-        <strong>fotos</strong>, <strong>produtos</strong> e links de contato — ajudando o público a conhecer o trabalho e tomar decisão com mais confiança.
-      </p>
-
-      <p>
-        Nosso objetivo é formar uma <strong>comunidade positiva</strong>, onde bons negócios ganham visibilidade e as pessoas encontram opções
-        com mais clareza, transparência e respeito.
-      </p>
-
-      <div class="section">
-        <div class="sectionTitle">O que você consegue fazer no app</div>
-
-        <h2>Para quem quer descobrir</h2>
-        <ul>
-          <li>Explorar um catálogo visual de negócios com <strong>fotos em destaque</strong></li>
-          <li>Buscar por <strong>categorias e subcategorias</strong> (ex.: beleza, comida, utilidades)</li>
-          <li>Abrir o perfil do negócio e ver descrição, valores, horários e endereço informado</li>
-          <li>Falar com o negócio rapidamente pelo contato disponibilizado (ex.: WhatsApp)</li>
-        </ul>
-
-        <h2>Para empreendedores</h2>
-        <ul>
-          <li>Criar e editar o <strong>perfil do negócio</strong> (bio, fotos, produtos e informações)</li>
-          <li>Mostrar o diferencial do trabalho com um portfólio visual</li>
-          <li>Receber feedback por meio de <strong>reviews</strong>, com possibilidade de <strong>responder publicamente</strong></li>
-          <li>Construir reputação e presença dentro do próprio catálogo</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <div class="sectionTitle">Reviews, respostas e comunidade</div>
-        <p>
-          O HELP permite <strong>avaliações (reviews)</strong> e <strong>respostas públicas</strong> do dono do negócio.
-          Isso ajuda a comunidade a entender experiências reais, comparar opções e manter mais transparência.
-        </p>
-
-        <p>
-          Para manter um ambiente saudável, o app possui recursos de <strong>denúncia</strong> e <strong>bloqueio</strong>:
-        </p>
-        <ul>
-          <li>Em detalhes do negócio, a bandeira permite <strong>“Denunciar negócio”</strong></li>
-          <li>Ao lado de um review, a bandeira permite <strong>“Denunciar review”</strong></li>
-          <li>Também é possível <strong>bloquear usuários</strong> para não ver mais conteúdo deles no app</li>
-        </ul>
-        <p class="muted">
-          Desbloquear: <code>Perfil → Editar perfil → Usuários bloqueados → Ver lista</code>.
-        </p>
-      </div>
-
-      <!-- ✅ Corrigido: estava quebrado e aparecendo "ong>Supabase..." -->
-      <div class="section">
-        <div class="sectionTitle">Privacidade (resumo rápido)</div>
-        <ul>
-          <li><strong>Sem anúncios</strong></li>
-          <li><strong>Sem tracking</strong></li>
-          <li><strong>Sem analytics</strong></li>
-          <li><strong>Sem coleta de GPS</strong></li>
-        </ul>
-        <p class="muted">
-          O app utiliza <strong>Supabase</strong> para autenticação, banco de dados e armazenamento de imagens,
-          apenas para entregar as funcionalidades do serviço.
-        </p>
-      </div>
-
-      <!-- ✅ Corrigido: links estavam virando texto (faltavam <a> completos) -->
-      <div class="section">
-        <div class="sectionTitle">Páginas oficiais neste site</div>
-
-        <div class="chipRow">
-          <a class="chip" href="/help-legal-site/privacy/"><span class="i">★</span> Privacidade</a>
-          <a class="chip" href="/help-legal-site/terms/"><span class="i">💬</span> Termos</a>
-          <a class="chip" href="/help-legal-site/delete-account/"><span class="i">🗑️</span> Excluir conta</a>
+      <div class="features-grid">
+        <div class="feature-card fade-up">
+          <span class="feature-icon">🔍</span>
+          <h3>Explore negócios</h3>
+          <p>Catálogo visual com fotos em destaque, categorias e filtros para encontrar o que precisa rápido.</p>
         </div>
-
-        <div class="bigCTA">
-          <a class="btn" href="/help-legal-site/support/">Falar com o Suporte</a>
+        <div class="feature-card fade-up">
+          <span class="feature-icon">💬</span>
+          <h3>Contato direto</h3>
+          <p>Fale com o negócio pelo WhatsApp ou pelo contato disponibilizado. Sem intermediários.</p>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-icon">⭐</span>
+          <h3>Reviews reais</h3>
+          <p>Avaliações da comunidade com respostas públicas dos donos. Mais transparência para decidir.</p>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-icon">🚀</span>
+          <h3>Para empreendedores</h3>
+          <p>Crie seu perfil com bio, fotos, produtos, horários e valores. Presença digital sem complicação.</p>
         </div>
       </div>
 
-      <div class="section">
-        <div class="sectionTitle">Excluir conta</div>
-        <p>Você pode excluir sua conta:</p>
-        <ul>
-          <li><strong>No app:</strong> <code>Perfil → Editar perfil → Excluir minha conta</code></li>
-          <li>
-            <strong>Fora do app:</strong> solicitação por e-mail em <strong>help.contatosuporte@gmail.com</strong>
-            (veja a página <a class="inline" href="/help-legal-site/delete-account/">Excluir conta</a>)
-          </li>
-        </ul>
-        <p class="muted">
-          Ao excluir, o HELP remove os dados vinculados ao usuário (perfil, negócios, fotos, reviews, curtidas/interações e registros associados).
-        </p>
+      <div class="stats-row fade-up">
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Anúncios</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Tracking</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Coleta de GPS</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Gratuito</div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <hr />
-      <p class="footer">
-        Suporte:
-        <a class="inline" href="mailto:help.contatosuporte@gmail.com">help.contatosuporte@gmail.com</a>
-        (até 48h)
+  <div class="divider"></div>
+
+  <!-- DOWNLOAD -->
+  <section class="download" id="download">
+    <div class="container">
+      <div class="download-card fade-up">
+        <div class="section-label">Baixe agora</div>
+        <h2>Pronto para descobrir negócios incríveis?</h2>
+        <p>Disponível gratuitamente na App Store e Google Play.</p>
+        <div class="store-buttons">
+          <a href="https://apps.apple.com/br/app/help-neg%C3%B3cios-locais/id6756894101" target="_blank" class="store-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div class="sl">
+              <small>Baixe na</small>
+              App Store
+            </div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.artur.help&hl=pt_BR" target="_blank" class="store-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+            <div class="sl">
+              <small>Disponível no</small>
+              Google Play
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LINKTREE -->
+  <section class="linktree" id="links">
+    <div class="container">
+      <div class="section-label fade-up">Links</div>
+      <h2 class="section-title fade-up">Nossos <span class="hl">canais</span></h2>
+      <p class="section-text fade-up">Encontre o HELP nas lojas e entre em contato.</p>
+
+      <div class="links-stack">
+
+        <a href="https://apps.apple.com/br/app/help-neg%C3%B3cios-locais/id6756894101" target="_blank" class="link-item fade-up">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="var(--orange)"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          </div>
+          <div class="link-item-text">
+            App Store
+            <small>Baixe para iPhone</small>
+          </div>
+        </a>
+
+        <a href="https://play.google.com/store/apps/details?id=com.artur.help&hl=pt_BR" target="_blank" class="link-item fade-up">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="var(--orange)"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+          </div>
+          <div class="link-item-text">
+            Google Play
+            <small>Baixe para Android</small>
+          </div>
+        </a>
+
+        <a href="mailto:help.contatosuporte@gmail.com" class="link-item fade-up">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="link-item-text">
+            E-mail / Suporte
+            <small>help.contatosuporte@gmail.com</small>
+          </div>
+        </a>
+
+        <!-- Instagram (em breve) -->
+        <div class="link-item link-disabled fade-up">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="var(--orange)" stroke="none"/></svg>
+          </div>
+          <div class="link-item-text">
+            Instagram
+            <small>Em breve</small>
+          </div>
+        </div>
+
+        <!-- TikTok (em breve) -->
+        <div class="link-item link-disabled fade-up">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="var(--orange)"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78c.27 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.3a6.34 6.34 0 0 0 10.86 4.46V13a8.28 8.28 0 0 0 5.58 2.17v-3.44a4.85 4.85 0 0 1-3.58-1.46V6.69h3.58z"/></svg>
+          </div>
+          <div class="link-item-text">
+            TikTok
+            <small>Em breve</small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LEGAL -->
+  <section class="legal-section" id="legal">
+    <div class="container">
+      <div class="section-label fade-up">Políticas & Suporte</div>
+      <h2 class="section-title fade-up">Páginas legais</h2>
+      <div class="legal-grid fade-up">
+        <a href="privacy/" class="legal-link">Privacidade</a>
+        <a href="terms/" class="legal-link">Termos de Uso</a>
+        <a href="delete-account/" class="legal-link">Excluir Conta</a>
+        <a href="support/" class="legal-link">Suporte</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <img src="assets/icon.png" alt="HELP" class="footer-logo">
+      <p class="footer-text">
+        &copy; 2025 HELP — Negócios Locais<br>
+        Feito por <a href="mailto:help.contatosuporte@gmail.com">Artur</a>
       </p>
     </div>
-  </main>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    // Scroll-triggered fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', (e) => {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.nav-hamburger');
+      if (menu && hamburger && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
