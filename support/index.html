@@ -1,119 +1,171 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Suporte, contato, denúncias e bloqueio de usuários no app HELP (Brasil)." />
-  <title>HELP • Suporte</title>
-
-  <!-- CSS (caminho seguro no GitHub Pages do projeto) -->
-  <link rel="stylesheet" href="/help-legal-site/assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suporte e Contato — HELP</title>
+  <meta name="description" content="Suporte e contato do app HELP — Negócios Locais.">
+  <meta name="theme-color" content="#110500">
+  <link rel="icon" href="../assets/icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --orange: #F77F00; --orange-light: #FF9A2E;
+      --bg: #110500; --bg-card: #1E0D02;
+      --text: #FFF5EB; --text2: #BFA48E; --text3: #7A6455;
+      --border: rgba(247,127,0,0.12); --border-h: rgba(247,127,0,0.3);
+      --r: 16px; --r-sm: 10px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+    body::before { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.02; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 256px; }
+    .glow-top { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse, rgba(247,127,0,0.07) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 0; background: rgba(17,5,0,0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; color: var(--text); }
+    .nav-brand:hover { text-decoration: none; }
+    .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-brand span { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a { font-size: 0.82rem; font-weight: 600; color: var(--text2); padding: 8px 14px; border-radius: 99px; transition: all 0.25s; }
+    .nav-links a:hover { color: var(--orange); background: rgba(247,127,0,0.08); text-decoration: none; }
+    .nav-links a.active { color: var(--orange); background: rgba(247,127,0,0.1); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--text2); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: 69px; left: 0; right: 0; background: rgba(17,5,0,0.96); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 16px 24px; z-index: 99; flex-direction: column; gap: 4px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { display: block; padding: 14px 16px; font-size: 0.92rem; font-weight: 600; color: var(--text2); border-radius: var(--r-sm); transition: all 0.2s; }
+    .mobile-menu a:hover { color: var(--orange); background: rgba(247,127,0,0.08); text-decoration: none; }
+    @media (max-width: 640px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
+    @media (min-width: 641px) { .nav-hamburger { display: none !important; } }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    .page-header { padding-top: 130px; padding-bottom: 40px; text-align: center; }
+    .page-header .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 99px; background: rgba(247,127,0,0.1); border: 1px solid rgba(247,127,0,0.2); font-size: 0.78rem; font-weight: 600; color: var(--orange); margin-bottom: 16px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .page-header h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 12px; }
+    .page-header h1 .hl { background: linear-gradient(135deg, var(--orange), var(--orange-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header .updated { font-size: 0.85rem; color: var(--text3); font-weight: 500; }
+    .content-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 40px 36px; margin-bottom: 32px; position: relative; overflow: hidden; }
+    .content-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--orange), transparent); }
+    .content-card h2 { font-size: 1.2rem; font-weight: 800; margin-top: 36px; margin-bottom: 14px; color: var(--text); }
+    .content-card h2:first-child { margin-top: 0; }
+    .content-card h3 { font-size: 1rem; font-weight: 700; margin-top: 24px; margin-bottom: 10px; }
+    .content-card p { color: var(--text2); font-size: 0.92rem; margin-bottom: 12px; line-height: 1.75; }
+    .content-card ul { list-style: none; padding: 0; margin-bottom: 12px; }
+    .content-card ul li { position: relative; padding-left: 20px; color: var(--text2); font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+    .content-card ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+    .content-card strong { color: var(--text); font-weight: 700; }
+    .content-card code { background: rgba(247,127,0,0.1); color: var(--orange); padding: 2px 8px; border-radius: 6px; font-size: 0.85rem; font-family: 'Outfit', monospace; }
+    .content-card hr { border: none; height: 1px; margin: 32px 0; background: linear-gradient(90deg, transparent, var(--border-h), transparent); }
+    .email-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px; border-radius: 14px; font-weight: 700; font-size: 0.92rem;
+      background: var(--orange); color: #110500;
+      transition: all 0.3s; margin-top: 8px; margin-bottom: 16px;
+    }
+    .email-btn:hover { background: var(--orange-light); text-decoration: none; transform: translateY(-2px); box-shadow: 0 4px 24px rgba(247,127,0,0.3); }
+    footer { text-align: center; padding: 40px 0 48px; border-top: 1px solid var(--border); }
+    .footer-logo { width: 40px; height: 40px; border-radius: 10px; margin: 0 auto 16px; opacity: 0.7; }
+    .footer-text { font-size: 0.8rem; color: var(--text3); font-weight: 500; line-height: 1.8; }
+    .footer-text a { color: var(--orange); }
+    .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 640px) { .content-card { padding: 28px 20px; } .page-header { padding-top: 110px; } }
+  </style>
 </head>
-
 <body>
-  <header>
+  <div class="glow-top"></div>
+  <nav>
     <div class="container">
-      <div class="brand">
-        <!-- Logo maior + “nota” da página -->
-        <img
-          src="/help-legal-site/assets/icon.png"
-          alt="HELP"
-          style="width:40px;height:40px;border-radius:10px;object-fit:cover;background:rgba(255,255,255,.18);padding:2px;border:1px solid rgba(255,255,255,.35);"
-        />
-        <span style="display:flex;align-items:center;gap:10px;color:#fff;">
-          <strong>Negócios Locais</strong>
-          <span style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.22);">
-            Suporte
-          </span>
-        </span>
+      <a href="../" class="nav-brand"><img src="../assets/icon.png" alt="HELP"><span>HELP</span></a>
+      <div class="nav-links">
+        <a href="../">Início</a>
+        <a href="../privacy/">Privacidade</a>
+        <a href="../terms/">Termos</a>
+        <a href="../delete-account/">Excluir conta</a>
+        <a href="../support/" class="active">Suporte</a>
       </div>
-
-      <nav>
-        <a href="/help-legal-site/">Início</a>
-        <a href="/help-legal-site/privacy/">Privacidade</a>
-        <a href="/help-legal-site/terms/">Termos</a>
-        <a href="/help-legal-site/delete-account/">Excluir conta</a>
-        <a href="/help-legal-site/support/" aria-current="page">Suporte</a>
-      </nav>
+      <button class="nav-hamburger" onclick="document.getElementById('mm').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
-  </header>
+  </nav>
+  <div class="mobile-menu" id="mm">
+    <a href="../">Início</a>
+    <a href="../privacy/">Privacidade</a>
+    <a href="../terms/">Termos</a>
+    <a href="../delete-account/">Excluir conta</a>
+    <a href="../support/">Suporte</a>
+  </div>
 
-  <main class="container">
-    <div class="card">
-      <h1>Suporte e Contato</h1>
-      <p class="muted">Última atualização: <strong>16/01/2026</strong></p>
-
-      <div class="section">
-        <div class="sectionTitle">Fale com a gente</div>
-        <p>Para dúvidas, problemas no app, pedidos ou solicitações, fale com o suporte:</p>
-
-        <ul>
-          <li>
-            <strong>E-mail:</strong>
-            <a class="inline" href="mailto:help.contatosuporte@gmail.com">help.contatosuporte@gmail.com</a>
-          </li>
-          <li><strong>Prazo de resposta:</strong> até <strong>48 horas</strong></li>
-        </ul>
-
-        <div class="bigCTA">
-          <a class="btn" href="mailto:help.contatosuporte@gmail.com?subject=Suporte%20HELP">Enviar e-mail para o suporte</a>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="sectionTitle">Denúncias (conteúdo e segurança)</div>
-
-        <p>
-          O HELP permite conteúdo gerado por usuários (ex.: perfis, fotos e reviews). Se você encontrar conteúdo inadequado,
-          você pode denunciar diretamente no app usando o <strong>ícone de bandeira</strong>.
-        </p>
-
-        <ul>
-          <li><strong>Em detalhes do negócio:</strong> no topo da tela, use a bandeira e selecione <strong>“Denunciar negócio”</strong>.</li>
-          <li><strong>Em reviews:</strong> ao lado do review, use a bandeira e selecione <strong>“Denunciar review”</strong>.</li>
-        </ul>
-
-        <p>Para enviar a denúncia, selecione:</p>
-        <ul>
-          <li>O motivo: Ofensivo, Conteúdo falso, Spam, Fraude, Ofensa/Discriminação ou Outro</li>
-          <li>Faça uma descrição sobre o ocorrido para entendermos melhor o caso</li>
-        </ul>
-
-        <p class="muted">
-          O que acontece depois: analisamos o reporte e, quando cabível, podemos remover conteúdo, restringir funcionalidades
-          ou aplicar medidas na conta conforme os Termos.
-        </p>
-      </div>
-
-      <div class="section">
-        <div class="sectionTitle">Bloquear usuários</div>
-        <p>
-          Além de denunciar, você também pode <strong>bloquear usuários</strong>. Quando um usuário está bloqueado,
-          você deixa de ver <strong>todo o conteúdo</strong> dele no app (ex.: reviews e interações).
-        </p>
-
-        <h3>Como desbloquear</h3>
-        <p>Você pode gerenciar e remover bloqueios seguindo este caminho no app:</p>
-        <p><code>Perfil → Editar perfil → Usuários bloqueados → Ver lista</code></p>
-      </div>
-
-      <div class="section">
-        <div class="sectionTitle">Privacidade e exclusão de conta</div>
-        <ul>
-          <li><a class="inline" href="/help-legal-site/privacy/">Política de Privacidade</a></li>
-          <li><a class="inline" href="/help-legal-site/delete-account/">Solicitar exclusão de conta</a></li>
-        </ul>
-        <p class="muted">
-          Exclusão pelo app: <code>Perfil → Editar perfil → Excluir minha conta</code>.
-          Sem o app: solicite por e-mail na página de exclusão.
-        </p>
-      </div>
-
-      <hr />
-      <p class="footer">
-        Contato oficial: <a class="inline" href="mailto:help.contatosuporte@gmail.com">help.contatosuporte@gmail.com</a>
-      </p>
+  <div class="page-header">
+    <div class="container">
+      <div class="badge fade-up">Ajuda</div>
+      <h1 class="fade-up">Suporte e <span class="hl">Contato</span></h1>
+      <p class="updated fade-up">Última atualização: 16/01/2026</p>
     </div>
-  </main>
+  </div>
+
+  <div class="container">
+    <div class="content-card fade-up">
+
+      <h2>Fale com a gente</h2>
+      <p>Para dúvidas, problemas no app, pedidos ou solicitações, fale com o suporte:</p>
+      <ul>
+        <li><strong>E-mail:</strong> <a href="mailto:help.contatosuporte@gmail.com">help.contatosuporte@gmail.com</a></li>
+        <li><strong>Prazo de resposta:</strong> até <strong>48 horas</strong></li>
+      </ul>
+      <a href="mailto:help.contatosuporte@gmail.com?subject=Suporte%20HELP" class="email-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Enviar e-mail para o suporte
+      </a>
+
+      <h2>Denúncias (conteúdo e segurança)</h2>
+      <p>O HELP permite conteúdo gerado por usuários (ex.: perfis, fotos e reviews). Se você encontrar conteúdo inadequado, você pode denunciar diretamente no app usando o <strong>ícone de bandeira</strong>.</p>
+      <ul>
+        <li><strong>Em detalhes do negócio:</strong> no topo da tela, use a bandeira e selecione <strong>"Denunciar negócio"</strong>.</li>
+        <li><strong>Em reviews:</strong> ao lado do review, use a bandeira e selecione <strong>"Denunciar review"</strong>.</li>
+      </ul>
+      <p>Para enviar a denúncia, selecione:</p>
+      <ul>
+        <li>O motivo: Ofensivo, Conteúdo falso, Spam, Fraude, Ofensa/Discriminação ou Outro</li>
+        <li>Faça uma descrição sobre o ocorrido para entendermos melhor o caso</li>
+      </ul>
+      <p><strong>O que acontece depois:</strong> analisamos o reporte e, quando cabível, podemos remover conteúdo, restringir funcionalidades ou aplicar medidas na conta conforme os Termos.</p>
+
+      <h2>Bloquear usuários</h2>
+      <p>Além de denunciar, você também pode <strong>bloquear usuários</strong>. Quando um usuário está bloqueado, você deixa de ver <strong>todo o conteúdo</strong> dele no app (ex.: reviews e interações).</p>
+
+      <h3>Como desbloquear</h3>
+      <p>Você pode gerenciar e remover bloqueios seguindo este caminho no app:</p>
+      <p><code>Perfil → Editar perfil → Usuários bloqueados → Ver lista</code></p>
+
+      <h2>Privacidade e exclusão de conta</h2>
+      <ul>
+        <li><a href="../privacy/">Política de Privacidade</a></li>
+        <li><a href="../delete-account/">Solicitar exclusão de conta</a></li>
+      </ul>
+      <p>Exclusão pelo app: <code>Perfil → Editar perfil → Excluir minha conta</code>.<br>
+      Sem o app: solicite por e-mail na página de exclusão.</p>
+
+      <hr>
+      <p>Contato oficial: <a href="mailto:help.contatosuporte@gmail.com">help.contatosuporte@gmail.com</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <img src="../assets/icon.png" alt="HELP" class="footer-logo">
+      <p class="footer-text">&copy; 2025 HELP — Negócios Locais<br>Feito com &#9829; por <a href="mailto:help.contatosuporte@gmail.com">Artur</a></p>
+    </div>
+  </footer>
+  <script>
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.addEventListener('click', (e) => { const m = document.getElementById('mm'), h = document.querySelector('.nav-hamburger'); if (m && h && !m.contains(e.target) && !h.contains(e.target)) m.classList.remove('open'); });
+  </script>
 </body>
 </html>
